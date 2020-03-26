@@ -7,7 +7,12 @@ class TestsController < ApplicationController
 
     def show
         test = Test.find(params[:id])
-        problems = Problem.all.select {|problem| problem.test_id == test.id }
         render json: test.to_json(except: [:created_at, :updated_at])
+    end
+
+    def problem
+        test = Test.find(params[:id])
+        problems = Problem.all.select {|problem| problem.test_id == test.id }
+        render json: problems.to_json(except: [:created_at, :updated_at])
     end
 end

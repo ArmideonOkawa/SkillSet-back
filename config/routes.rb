@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  #custom routes
+  get "/tests/:id/problems", to: "tests#problem"
+  get "/professions/:id/tests", to: "professions#tests"
   resources :problems
   resources :tests
   resources :professions

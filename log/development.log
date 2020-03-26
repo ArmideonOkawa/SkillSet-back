@@ -12599,3 +12599,343 @@ Processing by ProblemsController#index as */*
 Completed 200 OK in 16ms (Views: 15.4ms | ActiveRecord: 0.7ms | Allocations: 15516)
 
 
+Started GET "/" for ::1 at 2020-03-26 16:12:25 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 6.9ms | Allocations: 201)
+Completed 200 OK in 9ms (Views: 7.9ms | ActiveRecord: 0.0ms | Allocations: 869)
+
+
+Started GET "/tests" for ::1 at 2020-03-26 16:12:31 -0400
+Processing by TestsController#index as HTML
+  [1m[36mTest Load (1.0ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  ↳ app/controllers/tests_controller.rb:5:in `index'
+Completed 200 OK in 3ms (Views: 0.4ms | ActiveRecord: 1.0ms | Allocations: 1171)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:12:35 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.4ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.7ms | Allocations: 1437)
+
+
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:12:43 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/tests/1/problems"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:16:45 -0400
+  
+ActionController::RoutingError (uninitialized constant ControllerController):
+  
+activesupport (6.0.2.2) lib/active_support/inflector/methods.rb:282:in `const_get'
+activesupport (6.0.2.2) lib/active_support/inflector/methods.rb:282:in `block in constantize'
+activesupport (6.0.2.2) lib/active_support/inflector/methods.rb:280:in `each'
+activesupport (6.0.2.2) lib/active_support/inflector/methods.rb:280:in `inject'
+activesupport (6.0.2.2) lib/active_support/inflector/methods.rb:280:in `constantize'
+activesupport (6.0.2.2) lib/active_support/dependencies/zeitwerk_integration.rb:19:in `constantize'
+actionpack (6.0.2.2) lib/action_dispatch/http/request.rb:88:in `controller_class_for'
+actionpack (6.0.2.2) lib/action_dispatch/http/request.rb:81:in `controller_class'
+actionpack (6.0.2.2) lib/action_dispatch/routing/route_set.rb:45:in `controller'
+actionpack (6.0.2.2) lib/action_dispatch/routing/route_set.rb:31:in `serve'
+actionpack (6.0.2.2) lib/action_dispatch/journey/router.rb:49:in `block in serve'
+actionpack (6.0.2.2) lib/action_dispatch/journey/router.rb:32:in `each'
+actionpack (6.0.2.2) lib/action_dispatch/journey/router.rb:32:in `serve'
+actionpack (6.0.2.2) lib/action_dispatch/routing/route_set.rb:837:in `call'
+rack (2.2.2) lib/rack/etag.rb:27:in `call'
+rack (2.2.2) lib/rack/conditional_get.rb:27:in `call'
+rack (2.2.2) lib/rack/head.rb:12:in `call'
+activerecord (6.0.2.2) lib/active_record/migration.rb:567:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/callbacks.rb:27:in `block in call'
+activesupport (6.0.2.2) lib/active_support/callbacks.rb:101:in `run_callbacks'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/callbacks.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/actionable_exceptions.rb:17:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:32:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:19:10 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (3.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE (1) LIMIT $1[0m  [["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:15:in `problem'
+Completed 500 Internal Server Error in 57ms (ActiveRecord: 53.0ms | Allocations: 2246)
+
+
+  
+ActiveRecord::StatementInvalid (PG::DatatypeMismatch: ERROR:  argument of WHERE must be type boolean, not type integer
+LINE 1: SELECT "tests".* FROM "tests" WHERE (1) LIMIT $1
+                                             ^
+):
+  
+app/controllers/tests_controller.rb:15:in `problem'
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:19:29 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:15:in `problem'
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:16:in `problem'
+Completed 200 OK in 64ms (Views: 0.3ms | ActiveRecord: 47.1ms | Allocations: 12712)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:20:30 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1408)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:20:47 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 5.3ms | Allocations: 12692)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:20:48 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.2ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 0.1ms | ActiveRecord: 0.4ms | Allocations: 1408)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:20:49 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.6ms | Allocations: 1408)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:20:50 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.2ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1408)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:21:00 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.2ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 29ms (Views: 0.4ms | ActiveRecord: 5.4ms | Allocations: 12685)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:21:01 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+  [1m[36mProblem Load (0.2ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:10:in `show'
+Completed 200 OK in 3ms (Views: 0.2ms | ActiveRecord: 0.4ms | Allocations: 1409)
+
+
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:21:09 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProblem Load (0.2ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:15:in `problem'
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.2ms | Allocations: 802)
+
+
+  
+ArgumentError (wrong number of arguments (given 0, expected 2..3)):
+  
+app/controllers/tests_controller.rb:15:in `test'
+app/controllers/tests_controller.rb:15:in `block in problem'
+app/controllers/tests_controller.rb:15:in `problem'
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:21:53 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:16:in `problem'
+Completed 500 Internal Server Error in 12ms (ActiveRecord: 2.5ms | Allocations: 8296)
+
+
+  
+ArgumentError (wrong number of arguments (given 0, expected 2..3)):
+  
+app/controllers/tests_controller.rb:16:in `test'
+app/controllers/tests_controller.rb:16:in `block in problem'
+app/controllers/tests_controller.rb:16:in `problem'
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:21:55 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:16:in `problem'
+Completed 500 Internal Server Error in 1ms (ActiveRecord: 0.3ms | Allocations: 806)
+
+
+  
+ArgumentError (wrong number of arguments (given 0, expected 2..3)):
+  
+app/controllers/tests_controller.rb:16:in `test'
+app/controllers/tests_controller.rb:16:in `block in problem'
+app/controllers/tests_controller.rb:16:in `problem'
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:22:29 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:15:in `problem'
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:16:in `problem'
+Completed 200 OK in 21ms (Views: 0.3ms | ActiveRecord: 5.3ms | Allocations: 14087)
+
+
+Started GET "/tests/1" for ::1 at 2020-03-26 16:23:40 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+Completed 200 OK in 10ms (Views: 0.3ms | ActiveRecord: 2.5ms | Allocations: 5612)
+
+
+Started GET "/tests/" for ::1 at 2020-03-26 16:23:45 -0400
+Processing by TestsController#index as HTML
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  ↳ app/controllers/tests_controller.rb:5:in `index'
+Completed 200 OK in 2ms (Views: 0.2ms | ActiveRecord: 0.3ms | Allocations: 1098)
+
+
+Started GET "/tests/2" for ::1 at 2020-03-26 16:23:51 -0400
+Processing by TestsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:9:in `show'
+Completed 200 OK in 1ms (Views: 0.1ms | ActiveRecord: 0.1ms | Allocations: 689)
+
+
+Started GET "/tests/2/problems" for ::1 at 2020-03-26 16:23:57 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:14:in `problem'
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:15:in `problem'
+Completed 200 OK in 12ms (Views: 0.2ms | ActiveRecord: 2.5ms | Allocations: 7698)
+
+
+Started GET "/professions" for ::1 at 2020-03-26 16:28:15 -0400
+Processing by ProfessionsController#index as HTML
+  [1m[36mProfession Load (41.8ms)[0m  [1m[34mSELECT "professions".* FROM "professions"[0m
+  ↳ app/controllers/professions_controller.rb:5:in `index'
+No serializer found for resource: #<Profession id: 1, field: "Full Stack Developer", created_at: "2020-03-25 14:13:25", updated_at: "2020-03-25 14:13:25">
+[active_model_serializers] Rendered ActiveModel::Serializer::CollectionSerializer with Profession::ActiveRecord_Relation (0.65ms)
+Completed 200 OK in 53ms (Views: 6.7ms | ActiveRecord: 45.2ms | Allocations: 5002)
+
+
+Started GET "/professions/1/tests" for ::1 at 2020-03-26 16:28:22 -0400
+Processing by ProfessionsController#tests as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/professions_controller.rb:14:in `tests'
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  ↳ app/controllers/professions_controller.rb:15:in `tests'
+Completed 500 Internal Server Error in 201ms (ActiveRecord: 2.8ms | Allocations: 76877)
+
+
+  
+NameError (undefined local variable or method `profession' for #<ProfessionsController:0x00007ff4facad298>
+Did you mean?  profession_url):
+  
+app/controllers/professions_controller.rb:15:in `block in tests'
+app/controllers/professions_controller.rb:15:in `tests'
+Started GET "/professions/1/tests" for ::1 at 2020-03-26 16:28:51 -0400
+Processing by ProfessionsController#tests as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProfession Load (0.1ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/professions_controller.rb:14:in `tests'
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  ↳ app/controllers/professions_controller.rb:15:in `tests'
+Completed 200 OK in 17ms (Views: 0.3ms | ActiveRecord: 4.9ms | Allocations: 9254)
+
+
+Started GET "/problems" for ::1 at 2020-03-26 16:30:12 -0400
+Processing by ProblemsController#index as HTML
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/problems_controller.rb:5:in `index'
+Completed 200 OK in 12ms (Views: 0.3ms | ActiveRecord: 2.8ms | Allocations: 9015)
+
+
+Started GET "/tests" for ::1 at 2020-03-26 16:30:31 -0400
+Processing by TestsController#index as HTML
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  ↳ app/controllers/tests_controller.rb:5:in `index'
+Completed 200 OK in 10ms (Views: 0.2ms | ActiveRecord: 2.6ms | Allocations: 5546)
+
+
+Started GET "/tests/1/problems" for ::1 at 2020-03-26 16:30:36 -0400
+Processing by TestsController#problem as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/tests_controller.rb:14:in `problem'
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  ↳ app/controllers/tests_controller.rb:15:in `problem'
+Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 2902)
+
+
