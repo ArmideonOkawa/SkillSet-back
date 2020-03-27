@@ -12939,3 +12939,20 @@ Processing by TestsController#problem as HTML
 Completed 200 OK in 4ms (Views: 0.2ms | ActiveRecord: 0.5ms | Allocations: 2902)
 
 
+Started GET "/" for ::1 at 2020-03-26 22:37:46 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 28.0ms | Allocations: 195)
+Completed 200 OK in 36ms (Views: 31.9ms | ActiveRecord: 0.0ms | Allocations: 730)
+
+
+Started GET "/professions/1/tests" for ::1 at 2020-03-26 22:38:00 -0400
+Processing by ProfessionsController#tests as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mProfession Load (1.0ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  ↳ app/controllers/professions_controller.rb:14:in `tests'
+  [1m[36mTest Load (0.5ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  ↳ app/controllers/professions_controller.rb:15:in `tests'
+Completed 200 OK in 78ms (Views: 0.5ms | ActiveRecord: 60.0ms | Allocations: 4621)
+
+
