@@ -16,10 +16,10 @@ cs_rep = Profession.create(field: "Junior Developer")
 
 #tests
 dev_test = Test.create(profession_id: dev.id, name: "Software Developer Assessment", level: 1)
-fa_test = Test.create(profession_id: advisor.id, name: "Financial Advisor Assessment", level: 1)
-manager_test = Test.create(profession_id: manager.id, name: "Engineer Assessment", level: 1)
-animator_test = Test.create(profession_id: animator.id, name: "3-D Animator Assessment", level: 1)
-cs_test = Test.create(profession_id: cs_rep.id, name: "Customer Service Rep", level: 1)
+fa_test = Test.create(profession_id: advisor.id, name: "Dev Ops Manager", level: 1)
+manager_test = Test.create(profession_id: manager.id, name: "Senior Developer", level: 1)
+animator_test = Test.create(profession_id: animator.id, name: "UX Designer", level: 1)
+cs_test = Test.create(profession_id: cs_rep.id, name: "Junior Developer", level: 1)
 
 #questions
 #dev_quest
