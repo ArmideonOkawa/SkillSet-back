@@ -12956,3 +12956,444 @@ Processing by ProfessionsController#tests as HTML
 Completed 200 OK in 78ms (Views: 0.5ms | ActiveRecord: 60.0ms | Allocations: 4621)
 
 
+  [1m[35m (1.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (84.6ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_development"[0m
+  [1m[35m (33.9ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_test"[0m
+  [1m[35m (212.2ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (77.9ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (28.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (3.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7688518177641705180)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProfessions (20200323052515)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (26.8ms)[0m  [1m[35mCREATE TABLE "professions" ("id" bigserial primary key, "field" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.6ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323052515"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTests (20200323061126)
+  [1m[35m (40.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.2ms)[0m  [1m[35mCREATE TABLE "tests" ("id" bigserial primary key, "name" character varying, "level" integer, "profession_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7082ae1ce6"
+FOREIGN KEY ("profession_id")
+  REFERENCES "professions" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_tests_on_profession_id" ON "tests"  ("profession_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323061126"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProblems (20200325111113)
+  [1m[35m (40.6ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.8ms)[0m  [1m[35mCREATE TABLE "problems" ("id" bigserial primary key, "test_id" bigint NOT NULL, "question" character varying, "choice1" character varying, "choice2" character varying, "choice3" character varying, "choice4" character varying, "answer" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7f3823a5db"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (1.2ms)[0m  [1m[35mCREATE  INDEX  "index_problems_on_test_id" ON "problems"  ("test_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200325111113"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.7ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-27 18:59:57.938435"], ["updated_at", "2020-03-27 18:59:57.938435"]]
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7688518177641705180)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (69.5ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_development"[0m
+  [1m[35m (24.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_test"[0m
+  [1m[35m (63.7ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (58.3ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7688518177641705180)[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProfessions (20200323052515)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "professions" ("id" bigserial primary key, "field" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323052515"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTests (20200323061126)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "tests" ("id" bigserial primary key, "name" character varying, "level" integer, "profession_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7082ae1ce6"
+FOREIGN KEY ("profession_id")
+  REFERENCES "professions" ("id")
+)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE  INDEX  "index_tests_on_profession_id" ON "tests"  ("profession_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323061126"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProblems (20200325111113)
+  [1m[35m (0.4ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "problems" ("id" bigserial primary key, "test_id" bigint NOT NULL, "question" character varying, "choice1" character varying, "choice2" character varying, "choice3" character varying, "choice4" character varying, "answer" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7f3823a5db"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_problems_on_test_id" ON "problems"  ("test_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200325111113"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-27 19:01:11.932580"], ["updated_at", "2020-03-27 19:01:11.932580"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7688518177641705180)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.6ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Full Stack Developer"], ["created_at", "2020-03-27 19:01:12.018568"], ["updated_at", "2020-03-27 19:01:12.018568"]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.3ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Financial Advisor"], ["created_at", "2020-03-27 19:01:12.062447"], ["updated_at", "2020-03-27 19:01:12.062447"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "3-D Animator"], ["created_at", "2020-03-27 19:01:12.065867"], ["updated_at", "2020-03-27 19:01:12.065867"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Operations Manager"], ["created_at", "2020-03-27 19:01:12.068653"], ["updated_at", "2020-03-27 19:01:12.068653"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.9ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (2.6ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Customer Service Representative"], ["created_at", "2020-03-27 19:01:12.072884"], ["updated_at", "2020-03-27 19:01:12.072884"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.8ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Software Developer Assessment"], ["level", 1], ["profession_id", 1], ["created_at", "2020-03-27 19:01:12.113139"], ["updated_at", "2020-03-27 19:01:12.113139"]]
+  [1m[35m (15.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.3ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Create (0.5ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Financial Advisor Assessment"], ["level", 1], ["profession_id", 2], ["created_at", "2020-03-27 19:01:12.142293"], ["updated_at", "2020-03-27 19:01:12.142293"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Engineer Assessment"], ["level", 1], ["profession_id", 4], ["created_at", "2020-03-27 19:01:12.151741"], ["updated_at", "2020-03-27 19:01:12.151741"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "3-D Animator Assessment"], ["level", 1], ["profession_id", 3], ["created_at", "2020-03-27 19:01:12.161392"], ["updated_at", "2020-03-27 19:01:12.161392"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Customer Service Rep"], ["level", 1], ["profession_id", 5], ["created_at", "2020-03-27 19:01:12.180323"], ["updated_at", "2020-03-27 19:01:12.180323"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.9ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the JavaScript??"], ["choice1", "<script>"], ["choice2", "<javascript>"], ["choice3", "<js>"], ["choice4", "<scripting>"], ["answer", 1], ["created_at", "2020-03-27 19:01:12.195564"], ["updated_at", "2020-03-27 19:01:12.195564"]]
+  [1m[35m (40.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.4ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.5ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", "<script href='xxx.js'>"], ["choice2", "<script name='xxx.js'>"], ["choice3", "<script src='xxx.js'>"], ["choice4", "<script file='xxx.js'>"], ["answer", 3], ["created_at", "2020-03-27 19:01:12.244244"], ["updated_at", "2020-03-27 19:01:12.244244"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you write 'Hello World' in an alert box?"], ["choice1", "msgBox('Hello World');"], ["choice2", "alertBox('Hello World');"], ["choice3", "msg('Hello World');"], ["choice4", "alert('Hello World');"], ["answer", 4], ["created_at", "2020-03-27 19:01:12.250422"], ["updated_at", "2020-03-27 19:01:12.250422"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following will throw an error?"], ["choice1", "Cookies.all.select {|cookie| cookie.type}"], ["choice2", "Cookie.all {|cookie| cookie.type}>"], ["choice3", "button.addEventListener('submit', handleSubmit)"], ["choice4", "function()"], ["answer", 2], ["created_at", "2020-03-27 19:01:12.255231"], ["updated_at", "2020-03-27 19:01:12.255231"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the body"], ["choice1", "<html></html>"], ["choice2", "<docTYPE>"], ["choice3", "<div class='body'>"], ["choice4", "None of these"], ["answer", 1], ["created_at", "2020-03-27 19:01:12.260970"], ["updated_at", "2020-03-27 19:01:12.260970"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you use DOM elements in a .js file?"], ["choice1", "const element = document.QuerySelector('.element')"], ["choice2", "var elemant = document.QuerySelector('.element')"], ["choice3", "const element = document.GetElementById('.element')"], ["choice4", ".js files only can only be called in the index.html file"], ["answer", 1], ["created_at", "2020-03-27 19:01:12.265884"], ["updated_at", "2020-03-27 19:01:12.265884"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following declarations will create a variable whose content CANNOT be changed?"], ["choice1", "const lunchOrder = 'rock salt'"], ["choice2", "let lunchOrder = 'soup'"], ["choice3", "var lunchOrder = 'tofu'"], ["choice4", "static lunchOrder()"], ["answer", 1], ["created_at", "2020-03-27 19:01:12.269988"], ["updated_at", "2020-03-27 19:01:12.269988"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following JavaScript statements will change the text of the node with the id of 'dog' to the text 'Byron'?"], ["choice1", "document.querySelectorAll('span[0]').textContent = 'Byron';"], ["choice2", "document.querySelector('li').innerHTML = 'Byron';"], ["choice3", "document.GetElementById('dog').textContent = 'Byron';"], ["choice4", "document.getElementsByClass('span')[0].textContent = 'Byron'"], ["answer", 3], ["created_at", "2020-03-27 19:01:12.273677"], ["updated_at", "2020-03-27 19:01:12.273677"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What JavaScript command would return the name of the mongoose?"], ["choice1", "document.querySelectorAll('mongoose').text;"], ["choice2", "document.querySelector('mongoose').textContent;"], ["choice3", "document.querySelector('mongoose').text;"], ["choice4", "document.querySelectorAll('mongoose').content;"], ["answer", 2], ["created_at", "2020-03-27 19:01:12.277480"], ["updated_at", "2020-03-27 19:01:12.277480"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Given a method called razzle, how do you trigger its behavior?"], ["choice1", "(razzle)"], ["choice2", "razzle[]"], ["choice3", "razzle()"], ["choice4", "razzle"], ["answer", 3], ["created_at", "2020-03-27 19:01:12.282996"], ["updated_at", "2020-03-27 19:01:12.282996"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (27.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_development"[0m
+  [1m[35m (24.2ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_test"[0m
+  [1m[35m (63.2ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (61.6ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.2ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7688518177641705180)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProfessions (20200323052515)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "professions" ("id" bigserial primary key, "field" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323052515"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTests (20200323061126)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "tests" ("id" bigserial primary key, "name" character varying, "level" integer, "profession_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7082ae1ce6"
+FOREIGN KEY ("profession_id")
+  REFERENCES "professions" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_tests_on_profession_id" ON "tests"  ("profession_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323061126"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProblems (20200325111113)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.5ms)[0m  [1m[35mCREATE TABLE "problems" ("id" bigserial primary key, "test_id" bigint NOT NULL, "question" character varying, "choice1" character varying, "choice2" character varying, "choice3" character varying, "choice4" character varying, "answer" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7f3823a5db"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE  INDEX  "index_problems_on_test_id" ON "problems"  ("test_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200325111113"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-27 19:01:36.126162"], ["updated_at", "2020-03-27 19:01:36.126162"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_advisory_unlock(7688518177641705180)[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.5ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Full Stack Developer"], ["created_at", "2020-03-27 19:01:36.210446"], ["updated_at", "2020-03-27 19:01:36.210446"]]
+  [1m[35m (40.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.3ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Financial Advisor"], ["created_at", "2020-03-27 19:01:36.254439"], ["updated_at", "2020-03-27 19:01:36.254439"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "3-D Animator"], ["created_at", "2020-03-27 19:01:36.258035"], ["updated_at", "2020-03-27 19:01:36.258035"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Operations Manager"], ["created_at", "2020-03-27 19:01:36.260917"], ["updated_at", "2020-03-27 19:01:36.260917"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (2.5ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Customer Service Representative"], ["created_at", "2020-03-27 19:01:36.266209"], ["updated_at", "2020-03-27 19:01:36.266209"]]
+  [1m[35m (0.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.3ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.8ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Software Developer Assessment"], ["level", 1], ["profession_id", 1], ["created_at", "2020-03-27 19:01:36.300915"], ["updated_at", "2020-03-27 19:01:36.300915"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Create (0.4ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Financial Advisor Assessment"], ["level", 1], ["profession_id", 2], ["created_at", "2020-03-27 19:01:36.312164"], ["updated_at", "2020-03-27 19:01:36.312164"]]
+  [1m[35m (40.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTest Create (0.4ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Engineer Assessment"], ["level", 1], ["profession_id", 4], ["created_at", "2020-03-27 19:01:36.364749"], ["updated_at", "2020-03-27 19:01:36.364749"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Create (0.6ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "3-D Animator Assessment"], ["level", 1], ["profession_id", 3], ["created_at", "2020-03-27 19:01:36.376992"], ["updated_at", "2020-03-27 19:01:36.376992"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.3ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Customer Service Rep"], ["level", 1], ["profession_id", 5], ["created_at", "2020-03-27 19:01:36.395306"], ["updated_at", "2020-03-27 19:01:36.395306"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.6ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the JavaScript??"], ["choice1", "<script>"], ["choice2", "<javascript>"], ["choice3", "<js>"], ["choice4", "<scripting>"], ["answer", 1], ["created_at", "2020-03-27 19:01:36.408618"], ["updated_at", "2020-03-27 19:01:36.408618"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", "<script href='xxx.js'>"], ["choice2", "<script name='xxx.js'>"], ["choice3", "<script src='xxx.js'>"], ["choice4", "<script file='xxx.js'>"], ["answer", 3], ["created_at", "2020-03-27 19:01:36.413094"], ["updated_at", "2020-03-27 19:01:36.413094"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you write 'Hello World' in an alert box?"], ["choice1", "msgBox('Hello World');"], ["choice2", "alertBox('Hello World');"], ["choice3", "msg('Hello World');"], ["choice4", "alert('Hello World');"], ["answer", 4], ["created_at", "2020-03-27 19:01:36.417230"], ["updated_at", "2020-03-27 19:01:36.417230"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following will throw an error?"], ["choice1", "Cookies.all.select {|cookie| cookie.type}"], ["choice2", "Cookie.all {|cookie| cookie.type}>"], ["choice3", "button.addEventListener('submit', handleSubmit)"], ["choice4", "function()"], ["answer", 2], ["created_at", "2020-03-27 19:01:36.421160"], ["updated_at", "2020-03-27 19:01:36.421160"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the body"], ["choice1", "<html></html>"], ["choice2", "<docTYPE>"], ["choice3", "<div class='body'>"], ["choice4", "None of these"], ["answer", 1], ["created_at", "2020-03-27 19:01:36.425084"], ["updated_at", "2020-03-27 19:01:36.425084"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you use DOM elements in a .js file?"], ["choice1", "const element = document.QuerySelector('.element')"], ["choice2", "var elemant = document.QuerySelector('.element')"], ["choice3", "const element = document.GetElementById('.element')"], ["choice4", ".js files only can only be called in the index.html file"], ["answer", 1], ["created_at", "2020-03-27 19:01:36.428996"], ["updated_at", "2020-03-27 19:01:36.428996"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following declarations will create a variable whose content CANNOT be changed?"], ["choice1", "const lunchOrder = 'rock salt'"], ["choice2", "let lunchOrder = 'soup'"], ["choice3", "var lunchOrder = 'tofu'"], ["choice4", "static lunchOrder()"], ["answer", 1], ["created_at", "2020-03-27 19:01:36.432970"], ["updated_at", "2020-03-27 19:01:36.432970"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following JavaScript statements will change the text of the node with the id of 'dog' to the text 'Byron'?"], ["choice1", "document.querySelectorAll('span[0]').textContent = 'Byron';"], ["choice2", "document.querySelector('li').innerHTML = 'Byron';"], ["choice3", "document.GetElementById('dog').textContent = 'Byron';"], ["choice4", "document.getElementsByClass('span')[0].textContent = 'Byron'"], ["answer", 3], ["created_at", "2020-03-27 19:01:36.436783"], ["updated_at", "2020-03-27 19:01:36.436783"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What JavaScript command would return the name of the mongoose?"], ["choice1", "document.querySelectorAll('mongoose').text;"], ["choice2", "document.querySelector('mongoose').textContent;"], ["choice3", "document.querySelector('mongoose').text;"], ["choice4", "document.querySelectorAll('mongoose').content;"], ["answer", 2], ["created_at", "2020-03-27 19:01:36.440470"], ["updated_at", "2020-03-27 19:01:36.440470"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Given a method called razzle, how do you trigger its behavior?"], ["choice1", "(razzle)"], ["choice2", "razzle[]"], ["choice3", "razzle()"], ["choice4", "razzle"], ["answer", 3], ["created_at", "2020-03-27 19:01:36.444351"], ["updated_at", "2020-03-27 19:01:36.444351"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "Some question'?"], ["choice1", "A"], ["choice2", "b"], ["choice3", "c"], ["choice4", "d"], ["answer", 3], ["created_at", "2020-03-27 19:01:36.455532"], ["updated_at", "2020-03-27 19:01:36.455532"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:01:36.459935"], ["updated_at", "2020-03-27 19:01:36.459935"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:01:36.463723"], ["updated_at", "2020-03-27 19:01:36.463723"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:01:36.467876"], ["updated_at", "2020-03-27 19:01:36.467876"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:01:36.471649"], ["updated_at", "2020-03-27 19:01:36.471649"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (80.0ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_development"[0m
+  [1m[35m (30.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_test"[0m
+  [1m[35m (72.7ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (77.4ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (45.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.7ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7688518177641705180)[0m
+  [1m[35m (0.9ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProfessions (20200323052515)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "professions" ("id" bigserial primary key, "field" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323052515"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTests (20200323061126)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.3ms)[0m  [1m[35mCREATE TABLE "tests" ("id" bigserial primary key, "name" character varying, "level" integer, "profession_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7082ae1ce6"
+FOREIGN KEY ("profession_id")
+  REFERENCES "professions" ("id")
+)[0m
+  [1m[35m (1.1ms)[0m  [1m[35mCREATE  INDEX  "index_tests_on_profession_id" ON "tests"  ("profession_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323061126"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProblems (20200325111113)
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.7ms)[0m  [1m[35mCREATE TABLE "problems" ("id" bigserial primary key, "test_id" bigint NOT NULL, "question" character varying, "choice1" character varying, "choice2" character varying, "choice3" character varying, "choice4" character varying, "answer" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7f3823a5db"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_problems_on_test_id" ON "problems"  ("test_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200325111113"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-27 19:49:28.932109"], ["updated_at", "2020-03-27 19:49:28.932109"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7688518177641705180)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.8ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Full Stack Developer"], ["created_at", "2020-03-27 19:49:29.039828"], ["updated_at", "2020-03-27 19:49:29.039828"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Dev Ops Manager"], ["created_at", "2020-03-27 19:49:29.044208"], ["updated_at", "2020-03-27 19:49:29.044208"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Senior Developer"], ["created_at", "2020-03-27 19:49:29.047058"], ["updated_at", "2020-03-27 19:49:29.047058"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "UX Designer"], ["created_at", "2020-03-27 19:49:29.049699"], ["updated_at", "2020-03-27 19:49:29.049699"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.3ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Junior Developer"], ["created_at", "2020-03-27 19:49:29.054087"], ["updated_at", "2020-03-27 19:49:29.054087"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.9ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Software Developer Assessment"], ["level", 1], ["profession_id", 1], ["created_at", "2020-03-27 19:49:29.088117"], ["updated_at", "2020-03-27 19:49:29.088117"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.3ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Create (0.4ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Financial Advisor Assessment"], ["level", 1], ["profession_id", 2], ["created_at", "2020-03-27 19:49:29.100466"], ["updated_at", "2020-03-27 19:49:29.100466"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Engineer Assessment"], ["level", 1], ["profession_id", 4], ["created_at", "2020-03-27 19:49:29.109873"], ["updated_at", "2020-03-27 19:49:29.109873"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Create (0.4ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "3-D Animator Assessment"], ["level", 1], ["profession_id", 3], ["created_at", "2020-03-27 19:49:29.120582"], ["updated_at", "2020-03-27 19:49:29.120582"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mTest Create (0.2ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Customer Service Rep"], ["level", 1], ["profession_id", 5], ["created_at", "2020-03-27 19:49:29.130647"], ["updated_at", "2020-03-27 19:49:29.130647"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.6ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the JavaScript??"], ["choice1", "<script>"], ["choice2", "<javascript>"], ["choice3", "<js>"], ["choice4", "<scripting>"], ["answer", 1], ["created_at", "2020-03-27 19:49:29.156813"], ["updated_at", "2020-03-27 19:49:29.156813"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", "<script href='xxx.js'>"], ["choice2", "<script name='xxx.js'>"], ["choice3", "<script src='xxx.js'>"], ["choice4", "<script file='xxx.js'>"], ["answer", 3], ["created_at", "2020-03-27 19:49:29.161721"], ["updated_at", "2020-03-27 19:49:29.161721"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you write 'Hello World' in an alert box?"], ["choice1", "msgBox('Hello World');"], ["choice2", "alertBox('Hello World');"], ["choice3", "msg('Hello World');"], ["choice4", "alert('Hello World');"], ["answer", 4], ["created_at", "2020-03-27 19:49:29.166184"], ["updated_at", "2020-03-27 19:49:29.166184"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following will throw an error?"], ["choice1", "Cookies.all.select {|cookie| cookie.type}"], ["choice2", "Cookie.all {|cookie| cookie.type}>"], ["choice3", "button.addEventListener('submit', handleSubmit)"], ["choice4", "function()"], ["answer", 2], ["created_at", "2020-03-27 19:49:29.170403"], ["updated_at", "2020-03-27 19:49:29.170403"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the body"], ["choice1", "<html></html>"], ["choice2", "<docTYPE>"], ["choice3", "<div class='body'>"], ["choice4", "None of these"], ["answer", 1], ["created_at", "2020-03-27 19:49:29.174949"], ["updated_at", "2020-03-27 19:49:29.174949"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.4ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you use DOM elements in a .js file?"], ["choice1", "const element = document.QuerySelector('.element')"], ["choice2", "var elemant = document.QuerySelector('.element')"], ["choice3", "const element = document.GetElementById('.element')"], ["choice4", ".js files only can only be called in the index.html file"], ["answer", 1], ["created_at", "2020-03-27 19:49:29.179742"], ["updated_at", "2020-03-27 19:49:29.179742"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following declarations will create a variable whose content CANNOT be changed?"], ["choice1", "const lunchOrder = 'rock salt'"], ["choice2", "let lunchOrder = 'soup'"], ["choice3", "var lunchOrder = 'tofu'"], ["choice4", "static lunchOrder()"], ["answer", 1], ["created_at", "2020-03-27 19:49:29.185192"], ["updated_at", "2020-03-27 19:49:29.185192"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following JavaScript statements will change the text of the node with the id of 'dog' to the text 'Byron'?"], ["choice1", "document.querySelectorAll('span[0]').textContent = 'Byron';"], ["choice2", "document.querySelector('li').innerHTML = 'Byron';"], ["choice3", "document.GetElementById('dog').textContent = 'Byron';"], ["choice4", "document.getElementsByClass('span')[0].textContent = 'Byron'"], ["answer", 3], ["created_at", "2020-03-27 19:49:29.189859"], ["updated_at", "2020-03-27 19:49:29.189859"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What JavaScript command would return the name of the mongoose?"], ["choice1", "document.querySelectorAll('mongoose').text;"], ["choice2", "document.querySelector('mongoose').textContent;"], ["choice3", "document.querySelector('mongoose').text;"], ["choice4", "document.querySelectorAll('mongoose').content;"], ["answer", 2], ["created_at", "2020-03-27 19:49:29.193867"], ["updated_at", "2020-03-27 19:49:29.193867"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.5ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Given a method called razzle, how do you trigger its behavior?"], ["choice1", "(razzle)"], ["choice2", "razzle[]"], ["choice3", "razzle()"], ["choice4", "razzle"], ["answer", 3], ["created_at", "2020-03-27 19:49:29.198254"], ["updated_at", "2020-03-27 19:49:29.198254"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "Some question'?"], ["choice1", "A"], ["choice2", "b"], ["choice3", "c"], ["choice4", "d"], ["answer", 3], ["created_at", "2020-03-27 19:49:29.203015"], ["updated_at", "2020-03-27 19:49:29.203015"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:49:29.215343"], ["updated_at", "2020-03-27 19:49:29.215343"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:49:29.219445"], ["updated_at", "2020-03-27 19:49:29.219445"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:49:29.224028"], ["updated_at", "2020-03-27 19:49:29.224028"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.4ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 19:49:29.228116"], ["updated_at", "2020-03-27 19:49:29.228116"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m

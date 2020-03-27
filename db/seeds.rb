@@ -9,10 +9,10 @@
 #Professions
 
 dev = Profession.create(field: "Full Stack Developer")
-advisor = Profession.create(field: "Financial Advisor")
-animator = Profession.create(field: "3-D Animator")
-manager = Profession.create(field: "Operations Manager")
-cs_rep = Profession.create(field: "Customer Service Representative")
+advisor = Profession.create(field: "Dev Ops Manager")
+animator = Profession.create(field: "Senior Developer")
+manager = Profession.create(field: "UX Designer")
+cs_rep = Profession.create(field: "Junior Developer")
 
 #tests
 dev_test = Test.create(profession_id: dev.id, name: "Software Developer Assessment", level: 1)
@@ -121,4 +121,49 @@ dev_questions = Problem.create([{
     answer: 3
 }])
 
+fa_questions = Problem.create([{
+    test_id: fa_test.id,
+    question: "Some question'?" ,
+    choice1: "A",
+    choice2: "b",
+    choice3: "c",
+    choice4: "d",
+    answer: 3
+},
+{
+    test_id: fa_test.id,
+    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
+    choice1: "",
+    choice2: "",
+    choice3: "",
+    choice4: "",
+    answer: 3
+},
+{
+    test_id: fa_test.id,
+    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
+    choice1: "",
+    choice2: "",
+    choice3: "",
+    choice4: "",
+    answer: 3
+},
+{
+    test_id: fa_test.id,
+    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
+    choice1: "",
+    choice2: "",
+    choice3: "",
+    choice4: "",
+    answer: 3
+},
+{
+    test_id: fa_test.id,
+    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
+    choice1: "",
+    choice2: "",
+    choice3: "",
+    choice4: "",
+    answer: 3
 
+}])
