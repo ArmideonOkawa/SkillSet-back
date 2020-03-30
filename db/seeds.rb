@@ -7,16 +7,19 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 #Professions
+Profession.destroy_all
+Test.destroy_all
+Problem.destroy_all
 
 dev = Profession.create(field: "Full Stack Developer")
-advisor = Profession.create(field: "Dev Ops Manager")
+advisor = Profession.create(field: "DevOps Engineer")
 animator = Profession.create(field: "Senior Developer")
 manager = Profession.create(field: "UX Designer")
 cs_rep = Profession.create(field: "Junior Developer")
 
 #tests
-dev_test = Test.create(profession_id: dev.id, name: "Software Developer Assessment", level: 1)
-fa_test = Test.create(profession_id: advisor.id, name: "Dev Ops Manager", level: 1)
+dev_test = Test.create(profession_id: dev.id, name: "Software Developer ", level: 1)
+dev_ops = Test.create(profession_id: advisor.id, name: "DevOps", level: 1)
 manager_test = Test.create(profession_id: manager.id, name: "Senior Developer", level: 1)
 animator_test = Test.create(profession_id: animator.id, name: "UX Designer", level: 1)
 cs_test = Test.create(profession_id: cs_rep.id, name: "Junior Developer", level: 1)
@@ -121,49 +124,58 @@ dev_questions = Problem.create([{
     answer: 3
 }])
 
-fa_questions = Problem.create([{
-    test_id: fa_test.id,
-    question: "Some question'?" ,
-    choice1: "A",
-    choice2: "b",
-    choice3: "c",
-    choice4: "d",
+dev_ops = Problem.create([{
+    test_id: dev_ops.id,
+    question: "Which of the following best describes DevOps?" ,
+    choice1: "Dev Ops is a person who can work in both velopment and operations",
+    choice2: "Dev ops is a systematic approcah to improving cooperation between the development and operations",
+    choice3: "Dev Ops is a top selling Tom Clancy stealth shooter",
+    choice4: "DevOps is SPOVED spelled backwards",
     answer: 3
 },
 {
-    test_id: fa_test.id,
-    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
-    choice1: "",
-    choice2: "",
-    choice3: "",
-    choice4: "",
+    test_id: dev_ops.id,
+    question: "The DevOps movement grew out of which software development methodologies?" ,
+    choice1: "Agile",
+    choice2: "Waterfall",
+    choice3: "Skittles",
+    choice4: "Starbucks",
+    answer: 1
+},
+{
+    test_id: dev_ops.id,
+    question: "Which of these tools are NOT associated with DevOps?" ,
+    choice1: "Chef ",
+    choice2: "Puppet",
+    choice3: "Origami",
+    choice4: "Juju",
     answer: 3
 },
 {
-    test_id: fa_test.id,
-    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
-    choice1: "",
-    choice2: "",
-    choice3: "",
-    choice4: "",
+    test_id: dev_ops.id,
+    question: "Which of the following has nothing to do with DevOps?" ,
+    choice1: "CI/CD",
+    choice2: "Iaas",
+    choice3: "AC/DC",
+    choice4: "DevSecOps",
     answer: 3
 },
 {
-    test_id: fa_test.id,
-    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
-    choice1: "",
-    choice2: "",
-    choice3: "",
-    choice4: "",
-    answer: 3
-},
-{
-    test_id: fa_test.id,
-    question: "What is the correct syntax for referring to an external script called 'xxx.js'?" ,
-    choice1: "",
-    choice2: "",
-    choice3: "",
-    choice4: "",
-    answer: 3
+    test_id: dev_ops.id,
+    question: "DevOps automation tools epend on coding skills" ,
+    choice1: "True",
+    choice2: "False",
+    choice3: "Does not apply ",
+    choice4: "Coding is for losers",
+    answer: 2
 
+},
+{
+    test_id: dev_ops.id,
+    question: "DevOps automation tools epend on coding skills" ,
+    choice1: "True",
+    choice2: "False",
+    choice3: "Does not apply ",
+    choice4: "Coding is for losers",
+    answer: 2
 }])

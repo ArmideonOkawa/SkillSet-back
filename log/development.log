@@ -13536,3 +13536,638 @@ FOREIGN KEY ("test_id")
   [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
   [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 21:09:38.352323"], ["updated_at", "2020-03-27 21:09:38.352323"]]
   [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mProblem Load (0.3ms)[0m  [1m[34mSELECT "problems".* FROM "problems" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTest Load (0.4ms)[0m  [1m[34mSELECT "tests".* FROM "tests" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" LIMIT $1[0m  [["LIMIT", 11]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7688518177641705180)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7688518177641705180)[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (26.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_development"[0m
+  [1m[35m (24.4ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_test"[0m
+  [1m[35m (61.9ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (64.7ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (4.4ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.1ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7688518177641705180)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProfessions (20200323052515)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.8ms)[0m  [1m[35mCREATE TABLE "professions" ("id" bigserial primary key, "field" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323052515"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTests (20200323061126)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (3.9ms)[0m  [1m[35mCREATE TABLE "tests" ("id" bigserial primary key, "name" character varying, "level" integer, "profession_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7082ae1ce6"
+FOREIGN KEY ("profession_id")
+  REFERENCES "professions" ("id")
+)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE  INDEX  "index_tests_on_profession_id" ON "tests"  ("profession_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323061126"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProblems (20200325111113)
+  [1m[35m (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.9ms)[0m  [1m[35mCREATE TABLE "problems" ("id" bigserial primary key, "test_id" bigint NOT NULL, "question" character varying, "choice1" character varying, "choice2" character varying, "choice3" character varying, "choice4" character varying, "answer" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7f3823a5db"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_problems_on_test_id" ON "problems"  ("test_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200325111113"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-27 22:24:45.637471"], ["updated_at", "2020-03-27 22:24:45.637471"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7688518177641705180)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mProfession Load (0.4ms)[0m  [1m[34mSELECT "professions".* FROM "professions"[0m
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  [1m[36mProblem Load (0.5ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.5ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Full Stack Developer"], ["created_at", "2020-03-27 22:24:45.734531"], ["updated_at", "2020-03-27 22:24:45.734531"]]
+  [1m[35m (40.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.4ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Dev Ops Manager"], ["created_at", "2020-03-27 22:24:45.778380"], ["updated_at", "2020-03-27 22:24:45.778380"]]
+  [1m[35m (0.7ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (1.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (1.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Senior Developer"], ["created_at", "2020-03-27 22:24:45.783728"], ["updated_at", "2020-03-27 22:24:45.783728"]]
+  [1m[35m (0.9ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.3ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "UX Designer"], ["created_at", "2020-03-27 22:24:45.794012"], ["updated_at", "2020-03-27 22:24:45.794012"]]
+  [1m[35m (34.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.3ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Junior Developer"], ["created_at", "2020-03-27 22:24:45.836708"], ["updated_at", "2020-03-27 22:24:45.836708"]]
+  [1m[35m (0.2ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.7ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Software Developer Assessment"], ["level", 1], ["profession_id", 1], ["created_at", "2020-03-27 22:24:45.878539"], ["updated_at", "2020-03-27 22:24:45.878539"]]
+  [1m[35m (39.6ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Create (0.4ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Dev Ops Manager"], ["level", 1], ["profession_id", 2], ["created_at", "2020-03-27 22:24:45.928103"], ["updated_at", "2020-03-27 22:24:45.928103"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Senior Developer"], ["level", 1], ["profession_id", 4], ["created_at", "2020-03-27 22:24:45.938922"], ["updated_at", "2020-03-27 22:24:45.938922"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Create (0.4ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "UX Designer"], ["level", 1], ["profession_id", 3], ["created_at", "2020-03-27 22:24:45.957775"], ["updated_at", "2020-03-27 22:24:45.957775"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Junior Developer"], ["level", 1], ["profession_id", 5], ["created_at", "2020-03-27 22:24:45.962554"], ["updated_at", "2020-03-27 22:24:45.962554"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.6ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the JavaScript??"], ["choice1", "<script>"], ["choice2", "<javascript>"], ["choice3", "<js>"], ["choice4", "<scripting>"], ["answer", 1], ["created_at", "2020-03-27 22:24:45.974303"], ["updated_at", "2020-03-27 22:24:45.974303"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", "<script href='xxx.js'>"], ["choice2", "<script name='xxx.js'>"], ["choice3", "<script src='xxx.js'>"], ["choice4", "<script file='xxx.js'>"], ["answer", 3], ["created_at", "2020-03-27 22:24:45.979775"], ["updated_at", "2020-03-27 22:24:45.979775"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.6ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you write 'Hello World' in an alert box?"], ["choice1", "msgBox('Hello World');"], ["choice2", "alertBox('Hello World');"], ["choice3", "msg('Hello World');"], ["choice4", "alert('Hello World');"], ["answer", 4], ["created_at", "2020-03-27 22:24:45.985763"], ["updated_at", "2020-03-27 22:24:45.985763"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.3ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.4ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following will throw an error?"], ["choice1", "Cookies.all.select {|cookie| cookie.type}"], ["choice2", "Cookie.all {|cookie| cookie.type}>"], ["choice3", "button.addEventListener('submit', handleSubmit)"], ["choice4", "function()"], ["answer", 2], ["created_at", "2020-03-27 22:24:45.993529"], ["updated_at", "2020-03-27 22:24:45.993529"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.4ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the body"], ["choice1", "<html></html>"], ["choice2", "<docTYPE>"], ["choice3", "<div class='body'>"], ["choice4", "None of these"], ["answer", 1], ["created_at", "2020-03-27 22:24:45.999474"], ["updated_at", "2020-03-27 22:24:45.999474"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you use DOM elements in a .js file?"], ["choice1", "const element = document.QuerySelector('.element')"], ["choice2", "var elemant = document.QuerySelector('.element')"], ["choice3", "const element = document.GetElementById('.element')"], ["choice4", ".js files only can only be called in the index.html file"], ["answer", 1], ["created_at", "2020-03-27 22:24:46.005049"], ["updated_at", "2020-03-27 22:24:46.005049"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following declarations will create a variable whose content CANNOT be changed?"], ["choice1", "const lunchOrder = 'rock salt'"], ["choice2", "let lunchOrder = 'soup'"], ["choice3", "var lunchOrder = 'tofu'"], ["choice4", "static lunchOrder()"], ["answer", 1], ["created_at", "2020-03-27 22:24:46.009743"], ["updated_at", "2020-03-27 22:24:46.009743"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following JavaScript statements will change the text of the node with the id of 'dog' to the text 'Byron'?"], ["choice1", "document.querySelectorAll('span[0]').textContent = 'Byron';"], ["choice2", "document.querySelector('li').innerHTML = 'Byron';"], ["choice3", "document.GetElementById('dog').textContent = 'Byron';"], ["choice4", "document.getElementsByClass('span')[0].textContent = 'Byron'"], ["answer", 3], ["created_at", "2020-03-27 22:24:46.014135"], ["updated_at", "2020-03-27 22:24:46.014135"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What JavaScript command would return the name of the mongoose?"], ["choice1", "document.querySelectorAll('mongoose').text;"], ["choice2", "document.querySelector('mongoose').textContent;"], ["choice3", "document.querySelector('mongoose').text;"], ["choice4", "document.querySelectorAll('mongoose').content;"], ["answer", 2], ["created_at", "2020-03-27 22:24:46.018174"], ["updated_at", "2020-03-27 22:24:46.018174"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Given a method called razzle, how do you trigger its behavior?"], ["choice1", "(razzle)"], ["choice2", "razzle[]"], ["choice3", "razzle()"], ["choice4", "razzle"], ["answer", 3], ["created_at", "2020-03-27 22:24:46.022399"], ["updated_at", "2020-03-27 22:24:46.022399"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "Some question'?"], ["choice1", "A"], ["choice2", "b"], ["choice3", "c"], ["choice4", "d"], ["answer", 3], ["created_at", "2020-03-27 22:24:46.034267"], ["updated_at", "2020-03-27 22:24:46.034267"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 22:24:46.038221"], ["updated_at", "2020-03-27 22:24:46.038221"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 22:24:46.042097"], ["updated_at", "2020-03-27 22:24:46.042097"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 22:24:46.046901"], ["updated_at", "2020-03-27 22:24:46.046901"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", ""], ["choice2", ""], ["choice3", ""], ["choice4", ""], ["answer", 3], ["created_at", "2020-03-27 22:24:46.051369"], ["updated_at", "2020-03-27 22:24:46.051369"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Started GET "/" for ::1 at 2020-03-28 13:14:21 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 4.3ms | Allocations: 7)
+Completed 200 OK in 10ms (Views: 5.8ms | ActiveRecord: 0.0ms | Allocations: 396)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for ::1 at 2020-03-28 13:14:21 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/apple-touch-icon.png" for ::1 at 2020-03-28 13:14:21 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2020-03-28 13:14:21 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/apple-touch-icon-precomposed.png" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/apple-touch-icon.png" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/" for ::1 at 2020-03-28 13:14:22 -0400
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /Users/dianadee/.rvm/gems/ruby-2.6.1/gems/railties-6.0.2.2/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.4ms | Allocations: 8)
+Completed 200 OK in 3ms (Views: 2.9ms | ActiveRecord: 0.0ms | Allocations: 235)
+
+
+Started GET "/apple-touch-icon-precomposed.png" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/apple-touch-icon.png" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/apple-touch-icon-precomposed.png" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon-precomposed.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/apple-touch-icon.png" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/apple-touch-icon.png"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+Started GET "/favicon.ico" for ::1 at 2020-03-28 13:14:22 -0400
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+actionpack (6.0.2.2) lib/action_dispatch/middleware/debug_exceptions.rb:36:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/show_exceptions.rb:33:in `call'
+railties (6.0.2.2) lib/rails/rack/logger.rb:38:in `call_app'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `block in call'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `block in tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:28:in `tagged'
+activesupport (6.0.2.2) lib/active_support/tagged_logging.rb:80:in `tagged'
+railties (6.0.2.2) lib/rails/rack/logger.rb:26:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/remote_ip.rb:81:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/request_id.rb:27:in `call'
+rack (2.2.2) lib/rack/runtime.rb:22:in `call'
+activesupport (6.0.2.2) lib/active_support/cache/strategy/local_cache_middleware.rb:29:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/executor.rb:14:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/static.rb:126:in `call'
+rack (2.2.2) lib/rack/sendfile.rb:110:in `call'
+actionpack (6.0.2.2) lib/action_dispatch/middleware/host_authorization.rb:83:in `call'
+rack-cors (1.1.1) lib/rack/cors.rb:100:in `call'
+railties (6.0.2.2) lib/rails/engine.rb:526:in `call'
+puma (4.3.3) lib/puma/configuration.rb:228:in `call'
+puma (4.3.3) lib/puma/server.rb:682:in `handle_request'
+puma (4.3.3) lib/puma/server.rb:472:in `process_client'
+puma (4.3.3) lib/puma/server.rb:328:in `block in run'
+puma (4.3.3) lib/puma/thread_pool.rb:134:in `block in spawn_thread'
+  [1m[35m (1.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (43.4ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT "ar_internal_metadata"."value" FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1[0m  [["key", "environment"]]
+  [1m[35m (36.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_development"[0m
+  [1m[35m (26.8ms)[0m  [1m[35mDROP DATABASE IF EXISTS "up_skill_backend_test"[0m
+  [1m[35m (182.0ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_development" ENCODING = 'unicode'[0m
+  [1m[35m (67.0ms)[0m  [1m[35mCREATE DATABASE "up_skill_backend_test" ENCODING = 'unicode'[0m
+  [1m[35m (5.1ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[35m (2.1ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7688518177641705180)[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Migrating to CreateProfessions (20200323052515)
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (43.2ms)[0m  [1m[35mCREATE TABLE "professions" ("id" bigserial primary key, "field" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323052515"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateTests (20200323061126)
+  [1m[35m (39.7ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (4.0ms)[0m  [1m[35mCREATE TABLE "tests" ("id" bigserial primary key, "name" character varying, "level" integer, "profession_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7082ae1ce6"
+FOREIGN KEY ("profession_id")
+  REFERENCES "professions" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_tests_on_profession_id" ON "tests"  ("profession_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200323061126"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+Migrating to CreateProblems (20200325111113)
+  [1m[35m (39.5ms)[0m  [1m[35mBEGIN[0m
+  [1m[35m (2.6ms)[0m  [1m[35mCREATE TABLE "problems" ("id" bigserial primary key, "test_id" bigint NOT NULL, "question" character varying, "choice1" character varying, "choice2" character varying, "choice3" character varying, "choice4" character varying, "answer" integer, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL, CONSTRAINT "fk_rails_7f3823a5db"
+FOREIGN KEY ("test_id")
+  REFERENCES "tests" ("id")
+)[0m
+  [1m[35m (1.0ms)[0m  [1m[35mCREATE  INDEX  "index_problems_on_test_id" ON "problems"  ("test_id")[0m
+  [1m[36mprimary::SchemaMigration Create (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ($1) RETURNING "version"[0m  [["version", "20200325111113"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.3ms)[0m  [1m[34mSELECT "ar_internal_metadata".* FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 LIMIT $2[0m  [["key", "environment"], ["LIMIT", 1]]
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mActiveRecord::InternalMetadata Create (0.5ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ($1, $2, $3, $4) RETURNING "key"[0m  [["key", "environment"], ["value", "development"], ["created_at", "2020-03-30 12:14:47.449952"], ["updated_at", "2020-03-30 12:14:47.449952"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_advisory_unlock(7688518177641705180)[0m
+  [1m[35m (0.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mProfession Load (0.4ms)[0m  [1m[34mSELECT "professions".* FROM "professions"[0m
+  [1m[36mTest Load (0.6ms)[0m  [1m[34mSELECT "tests".* FROM "tests"[0m
+  [1m[36mProblem Load (0.6ms)[0m  [1m[34mSELECT "problems".* FROM "problems"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.4ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Full Stack Developer"], ["created_at", "2020-03-30 12:14:47.555035"], ["updated_at", "2020-03-30 12:14:47.555035"]]
+  [1m[35m (26.8ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.5ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "DevOps Engineer"], ["created_at", "2020-03-30 12:14:47.585464"], ["updated_at", "2020-03-30 12:14:47.585464"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Senior Developer"], ["created_at", "2020-03-30 12:14:47.590664"], ["updated_at", "2020-03-30 12:14:47.590664"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "UX Designer"], ["created_at", "2020-03-30 12:14:47.595238"], ["updated_at", "2020-03-30 12:14:47.595238"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Create (0.2ms)[0m  [1m[32mINSERT INTO "professions" ("field", "created_at", "updated_at") VALUES ($1, $2, $3) RETURNING "id"[0m  [["field", "Junior Developer"], ["created_at", "2020-03-30 12:14:47.602651"], ["updated_at", "2020-03-30 12:14:47.602651"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mTest Create (0.9ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Software Developer "], ["level", 1], ["profession_id", 1], ["created_at", "2020-03-30 12:14:47.639176"], ["updated_at", "2020-03-30 12:14:47.639176"]]
+  [1m[35m (40.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "DevOps"], ["level", 1], ["profession_id", 2], ["created_at", "2020-03-30 12:14:47.691044"], ["updated_at", "2020-03-30 12:14:47.691044"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Senior Developer"], ["level", 1], ["profession_id", 4], ["created_at", "2020-03-30 12:14:47.702751"], ["updated_at", "2020-03-30 12:14:47.702751"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.2ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 3], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "UX Designer"], ["level", 1], ["profession_id", 3], ["created_at", "2020-03-30 12:14:47.710525"], ["updated_at", "2020-03-30 12:14:47.710525"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mProfession Load (0.3ms)[0m  [1m[34mSELECT "professions".* FROM "professions" WHERE "professions"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+  [1m[36mTest Create (0.3ms)[0m  [1m[32mINSERT INTO "tests" ("name", "level", "profession_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5) RETURNING "id"[0m  [["name", "Junior Developer"], ["level", 1], ["profession_id", 5], ["created_at", "2020-03-30 12:14:47.727873"], ["updated_at", "2020-03-30 12:14:47.727873"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.6ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the JavaScript??"], ["choice1", "<script>"], ["choice2", "<javascript>"], ["choice3", "<js>"], ["choice4", "<scripting>"], ["answer", 1], ["created_at", "2020-03-30 12:14:47.739224"], ["updated_at", "2020-03-30 12:14:47.739224"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What is the correct syntax for referring to an external script called 'xxx.js'?"], ["choice1", "<script href='xxx.js'>"], ["choice2", "<script name='xxx.js'>"], ["choice3", "<script src='xxx.js'>"], ["choice4", "<script file='xxx.js'>"], ["answer", 3], ["created_at", "2020-03-30 12:14:47.743838"], ["updated_at", "2020-03-30 12:14:47.743838"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you write 'Hello World' in an alert box?"], ["choice1", "msgBox('Hello World');"], ["choice2", "alertBox('Hello World');"], ["choice3", "msg('Hello World');"], ["choice4", "alert('Hello World');"], ["answer", 4], ["created_at", "2020-03-30 12:14:47.747963"], ["updated_at", "2020-03-30 12:14:47.747963"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following will throw an error?"], ["choice1", "Cookies.all.select {|cookie| cookie.type}"], ["choice2", "Cookie.all {|cookie| cookie.type}>"], ["choice3", "button.addEventListener('submit', handleSubmit)"], ["choice4", "function()"], ["answer", 2], ["created_at", "2020-03-30 12:14:47.752414"], ["updated_at", "2020-03-30 12:14:47.752414"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Inside which HTML element do we put the body"], ["choice1", "<html></html>"], ["choice2", "<docTYPE>"], ["choice3", "<div class='body'>"], ["choice4", "None of these"], ["answer", 1], ["created_at", "2020-03-30 12:14:47.756589"], ["updated_at", "2020-03-30 12:14:47.756589"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "How do you use DOM elements in a .js file?"], ["choice1", "const element = document.QuerySelector('.element')"], ["choice2", "var elemant = document.QuerySelector('.element')"], ["choice3", "const element = document.GetElementById('.element')"], ["choice4", ".js files only can only be called in the index.html file"], ["answer", 1], ["created_at", "2020-03-30 12:14:47.760723"], ["updated_at", "2020-03-30 12:14:47.760723"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following declarations will create a variable whose content CANNOT be changed?"], ["choice1", "const lunchOrder = 'rock salt'"], ["choice2", "let lunchOrder = 'soup'"], ["choice3", "var lunchOrder = 'tofu'"], ["choice4", "static lunchOrder()"], ["answer", 1], ["created_at", "2020-03-30 12:14:47.764712"], ["updated_at", "2020-03-30 12:14:47.764712"]]
+  [1m[35m (0.5ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Which of the following JavaScript statements will change the text of the node with the id of 'dog' to the text 'Byron'?"], ["choice1", "document.querySelectorAll('span[0]').textContent = 'Byron';"], ["choice2", "document.querySelector('li').innerHTML = 'Byron';"], ["choice3", "document.GetElementById('dog').textContent = 'Byron';"], ["choice4", "document.getElementsByClass('span')[0].textContent = 'Byron'"], ["answer", 3], ["created_at", "2020-03-30 12:14:47.769564"], ["updated_at", "2020-03-30 12:14:47.769564"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "What JavaScript command would return the name of the mongoose?"], ["choice1", "document.querySelectorAll('mongoose').text;"], ["choice2", "document.querySelector('mongoose').textContent;"], ["choice3", "document.querySelector('mongoose').text;"], ["choice4", "document.querySelectorAll('mongoose').content;"], ["answer", 2], ["created_at", "2020-03-30 12:14:47.774051"], ["updated_at", "2020-03-30 12:14:47.774051"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 1], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 1], ["question", "Given a method called razzle, how do you trigger its behavior?"], ["choice1", "(razzle)"], ["choice2", "razzle[]"], ["choice3", "razzle()"], ["choice4", "razzle"], ["answer", 3], ["created_at", "2020-03-30 12:14:47.778089"], ["updated_at", "2020-03-30 12:14:47.778089"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "Which of the following best describes DevOps?"], ["choice1", "Dev Ops is a person who can work in both velopment and operations"], ["choice2", "Dev ops is a systematic approcah to improving cooperation between the development and operations"], ["choice3", "Dev Ops is a top selling Tom Clancy stealth shooter"], ["choice4", "DevOps is SPOVED spelled backwards"], ["answer", 3], ["created_at", "2020-03-30 12:14:47.789065"], ["updated_at", "2020-03-30 12:14:47.789065"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "The DevOps movement grew out of which software development methodologies?"], ["choice1", "Agile"], ["choice2", "Waterfall"], ["choice3", "Skittles"], ["choice4", "Starbucks"], ["answer", 1], ["created_at", "2020-03-30 12:14:47.793504"], ["updated_at", "2020-03-30 12:14:47.793504"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "Which of these tools are NOT associated with DevOps?"], ["choice1", "Chef "], ["choice2", "Puppet"], ["choice3", "Origami"], ["choice4", "Juju"], ["answer", 3], ["created_at", "2020-03-30 12:14:47.797835"], ["updated_at", "2020-03-30 12:14:47.797835"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "Which of the following has nothing to do with DevOps?"], ["choice1", "CI/CD"], ["choice2", "Iaas"], ["choice3", "AC/DC"], ["choice4", "DevSecOps"], ["answer", 3], ["created_at", "2020-03-30 12:14:47.802007"], ["updated_at", "2020-03-30 12:14:47.802007"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.2ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.3ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "DevOps automation tools epend on coding skills"], ["choice1", "True"], ["choice2", "False"], ["choice3", "Does not apply "], ["choice4", "Coding is for losers"], ["answer", 2], ["created_at", "2020-03-30 12:14:47.806671"], ["updated_at", "2020-03-30 12:14:47.806671"]]
+  [1m[35m (0.3ms)[0m  [1m[35mCOMMIT[0m
+  [1m[35m (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTest Load (0.1ms)[0m  [1m[34mSELECT "tests".* FROM "tests" WHERE "tests"."id" = $1 LIMIT $2[0m  [["id", 2], ["LIMIT", 1]]
+  [1m[36mProblem Create (0.2ms)[0m  [1m[32mINSERT INTO "problems" ("test_id", "question", "choice1", "choice2", "choice3", "choice4", "answer", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING "id"[0m  [["test_id", 2], ["question", "DevOps automation tools epend on coding skills"], ["choice1", "True"], ["choice2", "False"], ["choice3", "Does not apply "], ["choice4", "Coding is for losers"], ["answer", 2], ["created_at", "2020-03-30 12:14:47.810790"], ["updated_at", "2020-03-30 12:14:47.810790"]]
+  [1m[35m (0.4ms)[0m  [1m[35mCOMMIT[0m
