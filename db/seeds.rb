@@ -13,16 +13,16 @@ Problem.destroy_all
 
 dev = Profession.create(field: "Full Stack Developer")
 advisor = Profession.create(field: "DevOps Engineer")
-animator = Profession.create(field: "Senior Developer")
-manager = Profession.create(field: "UX Designer")
-cs_rep = Profession.create(field: "Junior Developer")
+# animator = Profession.create(field: "Senior Developer")
+# manager = Profession.create(field: "UX Designer")
+# cs_rep = Profession.create(field: "Junior Developer")
 
 #tests
 dev_test = Test.create(profession_id: dev.id, name: "Software Developer ", level: 1)
 dev_ops = Test.create(profession_id: advisor.id, name: "DevOps", level: 1)
-manager_test = Test.create(profession_id: manager.id, name: "Senior Developer", level: 1)
-animator_test = Test.create(profession_id: animator.id, name: "UX Designer", level: 1)
-cs_test = Test.create(profession_id: cs_rep.id, name: "Junior Developer", level: 1)
+# manager_test = Test.create(profession_id: manager.id, name: "Senior Developer", level: 1)
+# animator_test = Test.create(profession_id: animator.id, name: "UX Designer", level: 1)
+# cs_test = Test.create(profession_id: cs_rep.id, name: "Junior Developer", level: 1)
 
 #questions
 #dev_quest
